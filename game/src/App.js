@@ -9,15 +9,16 @@ import imgs from "./imgs.json";
 class App extends Component {
   // Setting this.state.imgs to the imgs json arrray
   state = {
-    imgs,
     ids: [],
     count: 0,
     wins: 0
   };
 
+  images = imgs;
+
   //Knuth Shuffle, found and explained on SO and refactored for my react app -> https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-this.state.imgs
   shuffleArr = () => {
-    var currentIndex = this.state.imgs.length, temporaryValue, randomIndex;
+    var currentIndex = this.images.length, temporaryValue, randomIndex;
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
@@ -27,12 +28,13 @@ class App extends Component {
       currentIndex -= 1;
 
       // And swap it with the current element.
-      temporaryValue = this.state.imgs[currentIndex];
-      this.state.imgs[currentIndex] = this.state.imgs[randomIndex];
-      this.state.imgs[randomIndex] = temporaryValue;
+      temporaryValue = this.images[currentIndex];
+      this.images[currentIndex] = this.images[randomIndex];
+      this.images[randomIndex] = temporaryValue;
+      
     }
-
-    this.setState({imgs: this.state.imgs})
+    return this.images
+    // this.setState({imgs: this.state.imgs})
   }
 
   checkImg = id => {
@@ -85,7 +87,7 @@ class App extends Component {
         </div>
         <Wrapper>
 
-          {this.state.imgs.map(imgs => (
+          {this.images.map(imgs => (
             <ImageDiv
               shuffleArr={this.shuffleArr}
               checkImg={this.checkImg}
