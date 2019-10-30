@@ -9,8 +9,9 @@ class App extends Component {
   // Setting this.state.imgs to the imgs json array
   state = {
     imgs,
+    ids: [],
     count: 0,
-    ids: []
+    wins: 0
   };
 
   checkImg = id => {
@@ -19,15 +20,20 @@ class App extends Component {
     // Set this.state.imgs equal to the new imgs array
     // this.setState({ imgs });
     if (!this.state.ids.includes(id)){
-      this.setState({ids: [...this.state.ids, this.id]})
+      this.setState({ids: [...this.state.ids, id]})
+      this.setState({count: this.state.count + 1})
+      if (this.state.count === 9){
+        this.setState({wins: this.state.wins + 1})
+      }
       console.log(this.state.ids)
     } else{
       this.setState({count: 0})
+      this.setState({ids: []})
     }
   };
 
-  count = id => {
-    console.log(id);
+  count = () => {
+    
     this.setState({count: this.state.count + 1})
   }
 
