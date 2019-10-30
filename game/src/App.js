@@ -7,7 +7,7 @@ import Wins from "./components/Wins";
 import imgs from "./imgs.json";
 
 class App extends Component {
-  // Setting this.state.imgs to the imgs json array
+  // Setting this.state.imgs to the imgs json arrray
   state = {
     imgs,
     ids: [],
@@ -15,10 +15,30 @@ class App extends Component {
     wins: 0
   };
 
+  //Knuth Shuffle, found and explained on SO and refactored for my react app -> https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-this.state.imgs
+  shuffleArr = () => {
+    var currentIndex = this.state.imgs.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = this.state.imgs[currentIndex];
+      this.state.imgs[currentIndex] = this.state.imgs[randomIndex];
+      this.state.imgs[randomIndex] = temporaryValue;
+    }
+
+    this.setState({imgs: this.state.imgs})
+  }
+
   checkImg = id => {
     // Filter this.state.imgs for imgs with an id not equal to the id being removed
     // const imgs = this.state.imgs.filter(imgs => imgs.id !== id);
-    // Set this.state.imgs equal to the new imgs array
+    // Set this.state.imgs equal to the new imgs arrray
     // this.setState({ imgs });
     if (this.state.count >= 9) {
       this.setState({ wins: this.state.wins + 1 })
@@ -66,7 +86,7 @@ class App extends Component {
 
           {this.state.imgs.map(imgs => (
             <ImageDiv
-              count={this.count}
+              shuffleArr={this.shuffleArr}
               checkImg={this.checkImg}
               id={imgs.id}
               key={imgs.id}
