@@ -9,14 +9,21 @@ class App extends Component {
   // Setting this.state.imgs to the imgs json array
   state = {
     imgs,
-    count: 0
+    count: 0,
+    ids: []
   };
 
   checkImg = id => {
     // Filter this.state.imgs for imgs with an id not equal to the id being removed
-    const imgs = this.state.imgs.filter(imgs => imgs.id !== id);
+    // const imgs = this.state.imgs.filter(imgs => imgs.id !== id);
     // Set this.state.imgs equal to the new imgs array
-    this.setState({ imgs });
+    // this.setState({ imgs });
+    if (!this.state.ids.includes(id)){
+      this.setState({ids: [...this.state.ids, this.id]})
+      console.log(this.state.ids)
+    } else{
+      this.setState({count: 0})
+    }
   };
 
   count = id => {
