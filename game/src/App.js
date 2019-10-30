@@ -21,7 +21,7 @@ class App extends Component {
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
-
+      
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
@@ -62,7 +62,8 @@ class App extends Component {
   }
   //inline styling because my div needed a background color for Title and the wins/count, which are not wrapped in a larger component.
   divStyle = {
-    background: "#121212"
+    background: "#121212",
+    paddingTop: "10px"
   }
 
   // Map over this.state.imgs and render a ImageDiv component for each imgs object
